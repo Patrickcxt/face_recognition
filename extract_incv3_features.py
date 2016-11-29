@@ -17,7 +17,6 @@ model_dir = './inceptionv3'
 #images_dir = '/home/amax/cxt/data/IMDB_WIKI/imdb_data/'
 images_dir = '/home/amax/cxt/data/IMDB_WIKI/wiki_face_opencv/'
 list_images = [f for f in os.listdir(images_dir) if re.search('jpg', f)]
-print(len(list_images))
 
 
 def create_graph():
@@ -35,8 +34,6 @@ def extract_features(list_images):
     create_graph()
 
     with tf.Session(config=tf.ConfigProto(log_device_placement=True)) as sess:
-    #with tf.Session() as sess:
-    #with tf.device("/gpu:1"):
         next_to_last_tensor = sess.graph.get_tensor_by_name('pool_3:0')
         k = 0
         for ind, image in enumerate(list_images):
@@ -55,15 +52,6 @@ def extract_features(list_images):
             else:
                 age_labels.append(age_label)
                 sex_labels.append(sex_label)
-            """
-            if age_label < 0 :
-                continue
-            if age_label > 100:
-                age_labels.append(10)
-            else:
-                age_labels.append(int(age_label/10))
-            """
-
 
             image = images_dir + image
             if not gfile.Exists(image):
@@ -78,9 +66,9 @@ def extract_features(list_images):
     return features, sex_labels, age_labels
 
 
-features, sex_labels, age_labels = extract_features(list_images)
 
-pickle.dump(features, open('./wiki_opencv_features/features_precise', 'wb'))
-pickle.dump(sex_labels, open('./wiki_opencv_features/sex_labels_precise', 'wb'))
-pickle.dump(age_labels, open('./wiki_opencv_features/age_labels_precise', 'wb'))
+features, sex_labels, age_labels = extract_features(list_images)
+pickle.dump(features, open('./wiki_opencv_features/features_incv3', 'wb'))
+pickle.dump(sex_labels, open('./wiki_opencv_features/sex_labels_incv3', 'wb'))
+pickle.dump(age_labels, open('./wiki_opencv_features/age_labels_incv3', 'wb'))
 
