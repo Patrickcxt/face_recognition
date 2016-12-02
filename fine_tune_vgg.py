@@ -86,11 +86,11 @@ def main(mode):
     train_sex_labels = sex_labels[:22000]
     test_sex_labels = sex_labels[22000:]
 
-    if mode == 'sex':
+    if mode == 'gender':
         num_output = 2
         train_labels = sex_labels[:22000]
         test_labels = sex_labels[22000:]
-    elif mode == 'training':
+    elif mode == 'age':
         num_output = 101
         train_labels = age_labels[:22000]
         test_labels = age_labels[22000:]

@@ -62,10 +62,10 @@ def main(mode, load_path, save_path):
 
     sess = tf.Session()
 
-    if mode == 'sex':
+    if mode == 'gender':
         num_output = 2
         num_feat = 4096
-    elif mode == 'training':
+    elif mode == 'age':
         num_output = 101
         num_feat = 101
     else:
@@ -113,6 +113,6 @@ if __name__ == '__main__':
 
     #  argv[1]: sex or training
     #  argv[2]: model path
-    #  argv[3]: save model path
+    #  argv[3]: save features path
     main(sys.argv[1], sys.argv[2], sys.argv[3])
 
